@@ -1,3 +1,5 @@
+//Estructura de la base de datos
+
 CREATE TABLE `rovercrop`.`estructura` (
   `idestructura` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
@@ -68,14 +70,30 @@ CREATE TABLE `rovercrop`.`rover` (
   `correo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idusuario`))
 
+// Se insertan dos datos a la tabla "Estructura" para el correcto funcionamiento de la funcion CalcularPesoRover.
 
 INSERT INTO ESTRUCTURA (nombre,peso,descripcion) VALUES
 	("Convecional", 9.2 ,"Es muy eficaz para terrenos firmes"),
 	("Oruga", 12.5 ,"Es muy eficaz para terrenos blandos");
+	
+// Se insertan dos datos a la tabla "Rueda" para el correcto funcionamiento de la funcion CalcularPesoRover.
 
 INSERT INTO RUEDA (nombre, tamaño, peso) VALUES
 	("Tipo panal", 10, 2.6),
 	("Tipo neumatico ancho", 10, 5.5);
+
+// En el siguiente bloque de codigo se crea una funcion en el que tiene como funcionalidad calcular el peso total del rover.
+	1) Colocamos DELIMITER para que MySQL sepa que lo siguiente que se realizará sera una funcion o procedimiento almacenado.
+	2) Creamos la funcion con " CREATE FUNCTION " y a continuacion de eso colocaremos el nombre de la funcion que realizaremos.
+	3) Definiremos los parametros que recibirá la funcion "CalcularPesoRover", en el que se pediran los id de la estructura y/o rueda que tienen como tipo de dato 		  entero, y a su vez, retornara un dato con tipo FLOAT
+	4) Colocaremos "DETERMINISTIC" debido a que es una palabra clave que le dice al sistema que la función siempre va a operar de la misma manera dados los mismos 		  parámetros de entrada.
+	5) Definiremos en donde iniciará (BEGIN) y finalizará (END) el codigo de la función.
+	6) Declararemos las variables que utilizaremos en nuestra función, en este caso crearemos "pesoE", "pesoR" y "pesoF" con el tipo de dato FLOAT.
+	7) Utilizaremos la SET para inicializar las variables "pesoE" y "pesoR" por medio de una consulta simple.
+	8) Inicializaremos la variable "pesoF" redondeando a dos decimales y sumando las variables "pesoE" y "pesoR".
+	9) Finalmente retornaremos la variable "pesoF".
+	10) Por ultimo se cierra el DELIMITER con los signos ( // ).
+	
 
 
 DELIMITER //
@@ -90,6 +108,8 @@ BEGIN
     RETURN pesoF;
 END;
 //
+
+// Aqui llamaremos la funcion anteriormente realzada, depositaremos los parametros requeridos.
 
 SELECT calcularPesoRover (2, 1);
   
