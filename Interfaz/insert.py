@@ -2,22 +2,6 @@ import flet as ft
 from conbd import *
 from registro import *
 
-
-mydt = ft.DataTable(
-        columns =[
-            ft.DataColumn(ft.Text("id",width=100)),
-            ft.DataColumn(ft.Text("nombre")),
-            ft.DataColumn(ft.Text("apellido")),
-            ft.DataColumn(ft.Text("fecha_nacimiento")),
-            ft.DataColumn(ft.Text("genero")),
-            ft.DataColumn(ft.Text("ocupacion")),
-            ft.DataColumn(ft.Text("Acciones")),
-            
-            
-        ], 
-        rows =[]
-    )
-
     #CREATE EDIT  INPUT
 edit_nametxt = ft.TextField(label="Nombre" )
 edit_lastnatxt = ft.TextField(label="Apellido")
