@@ -1,4 +1,5 @@
 #base de datos rover 
+
 CREATE TABLE  clima(
   id int NOT NULL AUTO_INCREMENT,
   nombre varchar(45) DEFAULT NULL,

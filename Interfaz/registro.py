@@ -231,7 +231,8 @@ def main(page: ft.Page):
                     ft.Row(
                         controls=[
                             ft.ElevatedButton("Guardar", on_click=addtodb),
-                        ]
+                            
+                        ], alignment=ft.MainAxisAlignment.CENTER
                     )
                 )
             ]
@@ -266,7 +267,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
-                                content=ft.Image(src="interfaz\\imagenes\\superficie.PNG", width=70, height=70)
+                                content=ft.Image(src="imagenes\superficie.PNG", width=70, height=70)
                             ),
                             terrenotxt
                         ],
@@ -279,7 +280,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="interfaz\imagenes\cultivo.PNG", width=60, height=60),
+                                content=ft.Image(src="imagenes\cultivo.PNG", width=60, height=60),
                             ),
                             cultivotxt
                         ],
@@ -292,8 +293,8 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="interfaz\\imagenes\\estructura.PNG", width=60, height=60),
-                            ),
+                                content=ft.Image(src="imagenes\estructura.PNG", width=60, height=60),
+                            ), 
                             estructuratxt,
                         ],
                         spacing=30

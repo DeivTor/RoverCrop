@@ -51,7 +51,7 @@ anotxt = ft.Dropdown(
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in ano],
     width=150,
-    height=60, color='white'
+    height=60, color='black'
 )
 
 mes = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
@@ -63,7 +63,7 @@ mestxt = ft.Dropdown(
     options=[ft.dropdown.Option(opcion) for opcion in mes],
     width=150,
     height=60, 
-    color='white'
+    color='black'
 )
 
 dia = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
@@ -75,7 +75,7 @@ diatxt = ft.Dropdown(
     options=[ft.dropdown.Option(opcion) for opcion in dia],
     width=150,
     height=60, 
-    color='white'
+    color='black'
 )
 
 scroll = "always",
