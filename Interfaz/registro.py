@@ -17,15 +17,15 @@ def main(page: ft.Page):
             mydt.rows.append(
                 ft.DataRow(
                     cells=[
-                    ft.DataCell(ft.Text(row['id'])),
-                    ft.DataCell(ft.Text(row['nombre'])),
-                    ft.DataCell(ft.Text(row['apellido'])),
-                    ft.DataCell(ft.Text(row['fecha_nacimiento'])),
-                    ft.DataCell(ft.Text(row['genero'])),
-                    ft.DataCell(ft.Text(row['ocupacion'])),
-                   
-                            ])
-                        ),
+                        ft.DataCell(ft.Text(row['id'])),
+                        ft.DataCell(ft.Text(row['nombre'])),
+                        ft.DataCell(ft.Text(row['apellido'])),
+                        ft.DataCell(ft.Text(row['fecha_nacimiento'])),
+                        ft.DataCell(ft.Text(row['genero'])),
+                        ft.DataCell(ft.Text(row['ocupacion'])),
+                    ]
+                )
+            ),
         page.update()
 
 
@@ -38,7 +38,7 @@ def main(page: ft.Page):
                 raise ValueError("Por favor ingrese todos los campos requeridos", datos_incompletos())
 
             if not idtxt.value.isdigit():
-                raise ValueError("la identificacion debe ser un número entero positivo", indentificacion_mal())
+                raise ValueError("la identificacion debe ser un número valido", indentificacion_mal())
 
             if not all(x.isalpha() for x in nametxt.value) or not all(x.isalpha() for x in lastnatxt.value):
                 raise ValueError("Nombre y apellido solo deben contener letras", nomapel_mal())
@@ -62,16 +62,16 @@ def main(page: ft.Page):
             load_data()
 
             page.snack_bar = ft.SnackBar(
-                    ft.Text("DATO AGREGADO EXITOSAMENTE", size =30),
-                    bgcolor="green"
+                ft.Text("DATO AGREGADO EXITOSAMENTE", size =30),
+                bgcolor="green"
             )
             page.snack_bar.open = True
             page.update()
                 
                 
         except Exception as e:
-                print(e)
-                print("Error al ingresar")
+            print(e)
+            print("Error al ingresar")
 
         idtxt.value=""
         nametxt.value =""
@@ -88,172 +88,239 @@ def main(page: ft.Page):
 
     def datos_incompletos():
         page.snack_bar = ft.SnackBar(
-                    ft.Text("Por favor ingrese todos los campos requeridos", size =30),
-                    bgcolor="orange"
-            )
+            ft.Text("Por favor ingrese todos los campos requeridos", size =30),
+            bgcolor="orange"
+        )
         page.snack_bar.open = True
         page.update()
 
     def indentificacion_mal():
         page.snack_bar = ft.SnackBar(
-                    ft.Text("la identificacion debe ser un número entero positivo", size =30),
-                    bgcolor="orange"
-            )
+            ft.Text("la identificacion debe ser un número entero positivo", size =30),
+            bgcolor="orange"
+        )
         page.snack_bar.open = True
         page.update()        
 
     def nomapel_mal():
-            page.snack_bar = ft.SnackBar(
-                        ft.Text("Nombre y apellido solo deben contener letras", size =30),
-                        bgcolor="orange"
-                )
-            page.snack_bar.open = True
-            page.update()
+        page.snack_bar = ft.SnackBar(
+            ft.Text("Nombre y apellido solo deben contener letras", size =30),
+            bgcolor="orange"
+        )
+        page.snack_bar.open = True
+        page.update()
+
     def id_existente():
-            page.snack_bar = ft.SnackBar(
-                        ft.Text("Ya hay un registro con la misma identificacion", size =30),
-                        bgcolor="orange"
-                )
-            page.snack_bar.open = True
-            page.update()    
+        page.snack_bar = ft.SnackBar(
+            ft.Text("Ya hay un registro con la misma identificacion", size =30),
+            bgcolor="orange"
+        )
+        page.snack_bar.open = True
+        page.update()    
 
 #pestaña login
     signup= ft.Container(
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 10,
+        border_radius= 30,
         content=ft.Column(
-            width=320,
+            width=500,
+            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
-                    margin=ft.margin.only(left=170,right=10,top=10),
-                    content=ft.TextButton(
-                        "Rover Crop",
-                        style=ft.ButtonStyle(
-                            color='green'
-                        )
-                    )
-                ),
-                ft.Container(
-                    width=300,
-                    margin=ft.margin.only(left=110,right=10,top=25),
+                    margin=ft.margin.only(top=70, bottom=30),
                     content=ft.Text(
                         "Registro",
-                        size=30,
+                        text_align=ft.TextAlign.CENTER,
+                        size=40,
                         color="#000000",
                         weight='w700'
                     )
                 ),
+                #Correo
                 ft.Container(
-                        ft.Row(
-                             controls=[
-                                   idtxt,
-                                    nametxt,
-                                    lastnatxt,
-                            ])
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                margin=ft.margin.symmetric(horizontal=20),
+                                content= usuariotxt
+                            )
+                        ]
+                    ),
+                    margin=ft.margin.symmetric(horizontal=50)
+                ),
+                #Datos personales
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= idtxt
                             ),
-                ft.Container(
-                     ft.Row(
-                            controls=[
-                                fech,
-                                anotxt,
-                                mestxt,
-                                diatxt, 
-                            ])),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= nametxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= lastnatxt
+                            )
+                        ],
+                        alignment = ft.CrossAxisAlignment.CENTER,
+                        spacing=15
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                # Ocupacion - Genero
                 ft.Container(            
-                        ft.Row(
-                            controls=[
-                                profesitxt,
-                                genetxt, 
-                                
-                            ]
-                        )),
-                ft.Container(        
-                        ft.Row(
-                            controls=[
-                                usuariotxt,
-                                contrasenatxt
-                            ])),
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=profesitxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=genetxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=20
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                # Fecha de nacimiento
                 ft.Container(
-                             ft.Row(
-                            controls=[
-                                ft.ElevatedButton("Guardar", on_click=addtodb),
-                        ]))
-                   
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=anotxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=mestxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=diatxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=23
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                # Contrasena
+                ft.Container(        
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=contrasenatxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.ElevatedButton("Guardar", on_click=addtodb),
+                        ]
+                    )
+                )
             ]
-        )
-        )
-
-    
+        ),
+    )
 
 #pestaña simulacion
     simulacion= ft.Container(
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 10,
+        border_radius= 30,
         content=ft.Column(
-            width=320,
+            width=659,
+            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
-                    margin=ft.margin.only(left=170,right=10,top=10),
-                    content=ft.TextButton(
-                        "Rover Crop",
-                        style=ft.ButtonStyle(
-                            color='green'
-                        )
-                    )
-                ),
-                ft.Container(
-                    width=300,
-                    margin=ft.margin.only(left=110,right=10,top=25),
+                    margin=ft.margin.only(top=70),
                     content=ft.Text(
                         "Simulación",
-                        size=30,
+                        text_align=ft.TextAlign.CENTER,
+                        size=40,
                         color="#000000",
                         weight='w700'
                     )
+                ),
+
+                ft.Container(
+                    margin=ft.margin.only(top=50),
+                    content=ft.Row(
+                        controls=[
+                            ft.Container(
+                                margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
+                                content=ft.Image(src="interfaz\\imagenes\\superficie.PNG", width=70, height=70)
+                            ),
+                            terrenotxt
+                        ],
+                        spacing=30
+                    )
+                ),
+                ft.Container(
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
+                        controls=[
+                            ft.Container(
+                                margin=ft.margin.only(left=30),
+                                content=ft.Image(src="interfaz\imagenes\cultivo.PNG", width=60, height=60),
+                            ),
+                            cultivotxt
+                        ],
+                        spacing=30
                     ),
-                ft.Container(
-                     ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\limoso.PNG", width=150, height=100),
-                      terrenotxt
-                      ])
-                     
                 ),
                 ft.Container(
-                     ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\cultivo.PNG", width=150, height=100),
-                      cultivotxt
-                      
-                   ]),
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
+                        controls=[
+                            ft.Container(
+                                margin=ft.margin.only(left=30),
+                                content=ft.Image(src="interfaz\\imagenes\\estructura.PNG", width=60, height=60),
+                            ),
+                            estructuratxt,
+                        ],
+                        spacing=30
+                    ),
                 ),
                 ft.Container(
-                    ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\estructura.PNG", width=150, height=100),
-                      estructuratxt,   
-                   ]),
-                     
-                ),
-                ft.Container(
-                    ft.Row( 
-                   controls=[
-                      
-                      ft.ElevatedButton("ver simulación"),
-                      
-                      
-                   ]),
-                     
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
+                        controls=[
+                            ft.ElevatedButton(
+                                "Ver simulación",
+                                style=ft.ButtonStyle(
+                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE70},
+                                    padding={ft.MaterialState.HOVERED: 20},
+                                    elevation={"pressed": 0, "": 1},
+                                    animation_duration=5000000,
+                                )
+                            )
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER
+                    ),
                 ),    
-            ]
-        ))
-    
+            ],
+        )
+    )
+
+
 #pestaña principal 
     body = ft.Container(
         width=1000,

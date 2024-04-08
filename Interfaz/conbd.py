@@ -8,9 +8,9 @@ conexion = mysql.connector.connect(
     host='localhost',
     port=3306,
     user='root',
-    password='',
+    password='12345',
     db='rovercrop'
-    )
+)
 
 cursor = conexion.cursor()
 
@@ -22,16 +22,14 @@ else:
 
 
 mydt = ft.DataTable(
-        columns =[
-            ft.DataColumn(ft.Text("id",width=100)),
-            ft.DataColumn(ft.Text("nombre")),
-            ft.DataColumn(ft.Text("apellido")),
-            ft.DataColumn(ft.Text("fecha_nacimiento")),
-            ft.DataColumn(ft.Text("genero")),
-            ft.DataColumn(ft.Text("ocupacion")),
-            ft.DataColumn(ft.Text("Acciones")),
-            
-            
-        ], 
-        rows =[]
+    columns =[
+        ft.DataColumn(ft.Text("id",width=100)),
+        ft.DataColumn(ft.Text("nombre")),
+        ft.DataColumn(ft.Text("apellido")),
+        ft.DataColumn(ft.Text("fecha_nacimiento")),
+        ft.DataColumn(ft.Text("genero")),
+        ft.DataColumn(ft.Text("ocupacion")),
+        ft.DataColumn(ft.Text("Acciones")),
+    ], 
+    rows =[]
 )
