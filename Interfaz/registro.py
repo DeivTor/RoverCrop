@@ -2,30 +2,16 @@ import flet as ft
 from conbd import *
 from variables import *
 
-
 def main(page: ft.Page):
     page.title = "RoverCrop"
-    page.bgcolor='BLACK_26'
-    page.padding=20
-    page.theme_mode = ft.ThemeMode.LIGHT
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.padding=20
-    page.scroll = "always"
-   
-   
-    t = ft.Text(value="BASE DE DATOS ROVERCROP",  color='green')
-    page.controls.append(t)
-    page.update()
 
+#funcion para llamar la tabla requirida para el registro de los datos 
     def load_data():
         cursor.execute("SELECT * FROM usuario")
         result = cursor.fetchall()
-        #AND PUSH DATA TO DICT
         columns = [column [0] for column in cursor.description]
         rows = [dict(zip(columns, row)) for row in result]
 
-            #LOOP AND PUSH
         
         for row in rows:
             mydt.rows.append(
@@ -45,6 +31,7 @@ def main(page: ft.Page):
 
     load_data()
 
+#Guardar datos en las tablas y funciones que evitan errores de usuario
     def addtodb(e):
         try:
             if not idtxt.value or not nametxt.value or not lastnatxt.value or not anotxt.value or not mestxt or not diatxt or not genetxt.value or not profesitxt.value or not usuariotxt.value or not contrasenatxt.value:
@@ -128,37 +115,159 @@ def main(page: ft.Page):
                         bgcolor="orange"
                 )
             page.snack_bar.open = True
-            page.update()            
-    page.add(
-    ft.Row(controls=[t]),
-        
-        ft.Row(
+            page.update()    
+
+#pestaña login
+    signup= ft.Container(
+        width=659,
+        height=750,
+        bgcolor="#ffffff",
+        border_radius= 10,
+        content=ft.Column(
+            width=320,
             controls=[
-                idtxt,
-                nametxt,
-                lastnatxt,
-                fech,
-                anotxt,
-                mestxt,
-                diatxt, 
-                
-             ]
-        ),
-        ft.Row(
-            controls=[
-                 profesitxt,
-                genetxt, 
-                usuariotxt,
-                contrasenatxt
+                ft.Container(
+                    width=300,
+                    margin=ft.margin.only(left=170,right=10,top=10),
+                    content=ft.TextButton(
+                        "Rover Crop",
+                        style=ft.ButtonStyle(
+                            color='green'
+                        )
+                    )
+                ),
+                ft.Container(
+                    width=300,
+                    margin=ft.margin.only(left=110,right=10,top=25),
+                    content=ft.Text(
+                        "Registro",
+                        size=30,
+                        color="#000000",
+                        weight='w700'
+                    )
+                ),
+                ft.Container(
+                        ft.Row(
+                             controls=[
+                                   idtxt,
+                                    nametxt,
+                                    lastnatxt,
+                            ])
+                            ),
+                ft.Container(
+                     ft.Row(
+                            controls=[
+                                fech,
+                                anotxt,
+                                mestxt,
+                                diatxt, 
+                            ])),
+                ft.Container(            
+                        ft.Row(
+                            controls=[
+                                profesitxt,
+                                genetxt, 
+                                
+                            ]
+                        )),
+                ft.Container(        
+                        ft.Row(
+                            controls=[
+                                usuariotxt,
+                                contrasenatxt
+                            ])),
+                ft.Container(
+                             ft.Row(
+                            controls=[
+                                ft.ElevatedButton("Guardar", on_click=addtodb),
+                        ]))
+                   
             ]
-        ),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton("Guardar", on_click=addtodb),
-         ]), 
-    )
+        )
+        )
+
     
 
+#pestaña simulacion
+    simulacion= ft.Container(
+        width=659,
+        height=750,
+        bgcolor="#ffffff",
+        border_radius= 10,
+        content=ft.Column(
+            width=320,
+            controls=[
+                ft.Container(
+                    width=300,
+                    margin=ft.margin.only(left=170,right=10,top=10),
+                    content=ft.TextButton(
+                        "Rover Crop",
+                        style=ft.ButtonStyle(
+                            color='green'
+                        )
+                    )
+                ),
+                ft.Container(
+                    width=300,
+                    margin=ft.margin.only(left=110,right=10,top=25),
+                    content=ft.Text(
+                        "Simulación",
+                        size=30,
+                        color="#000000",
+                        weight='w700'
+                    )
+                    ),
+                ft.Container(
+                     ft.Row(
+                   controls=[
+                      ft.Image(src="prueba\imagenes\limoso.PNG", width=150, height=100),
+                      terrenotxt
+                      ])
+                     
+                ),
+                ft.Container(
+                     ft.Row(
+                   controls=[
+                      ft.Image(src="prueba\imagenes\cultivo.PNG", width=150, height=100),
+                      cultivotxt
+                      
+                   ]),
+                ),
+                ft.Container(
+                    ft.Row(
+                   controls=[
+                      ft.Image(src="prueba\imagenes\estructura.PNG", width=150, height=100),
+                      estructuratxt,   
+                   ]),
+                     
+                ),
+                ft.Container(
+                    ft.Row( 
+                   controls=[
+                      
+                      ft.ElevatedButton("ver simulación"),
+                      
+                      
+                   ]),
+                     
+                ),    
+            ]
+        ))
+    
+#pestaña principal 
+    body = ft.Container(
+        width=1000,
+        height=620,
+        content=ft.Row(
+            controls=[
+                signup,
+                simulacion
+            ]
+        )
+    )
+        
+    page.add(body)
 
 
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+
+ft.app(target=main)       
