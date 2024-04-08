@@ -17,15 +17,15 @@ def main(page: ft.Page):
             mydt.rows.append(
                 ft.DataRow(
                     cells=[
-                    ft.DataCell(ft.Text(row['id'])),
-                    ft.DataCell(ft.Text(row['nombre'])),
-                    ft.DataCell(ft.Text(row['apellido'])),
-                    ft.DataCell(ft.Text(row['fecha_nacimiento'])),
-                    ft.DataCell(ft.Text(row['genero'])),
-                    ft.DataCell(ft.Text(row['ocupacion'])),
-                   
-                            ])
-                        ),
+                        ft.DataCell(ft.Text(row['id'])),
+                        ft.DataCell(ft.Text(row['nombre'])),
+                        ft.DataCell(ft.Text(row['apellido'])),
+                        ft.DataCell(ft.Text(row['fecha_nacimiento'])),
+                        ft.DataCell(ft.Text(row['genero'])),
+                        ft.DataCell(ft.Text(row['ocupacion'])),
+                    ]
+                )
+            ),
         page.update()
 
 
@@ -38,7 +38,7 @@ def main(page: ft.Page):
                 raise ValueError("Por favor ingrese todos los campos requeridos", datos_incompletos())
 
             if not idtxt.value.isdigit():
-                raise ValueError("la identificacion debe ser un número entero positivo", indentificacion_mal())
+                raise ValueError("la identificacion debe ser un número valido", indentificacion_mal())
 
             if not all(x.isalpha() for x in nametxt.value) or not all(x.isalpha() for x in lastnatxt.value):
                 raise ValueError("Nombre y apellido solo deben contener letras", nomapel_mal())
@@ -62,16 +62,16 @@ def main(page: ft.Page):
             load_data()
 
             page.snack_bar = ft.SnackBar(
-                    ft.Text("DATO AGREGADO EXITOSAMENTE", size =30),
-                    bgcolor="green"
+                ft.Text("DATO AGREGADO EXITOSAMENTE", size =30),
+                bgcolor="green"
             )
             page.snack_bar.open = True
             page.update()
                 
                 
         except Exception as e:
-                print(e)
-                print("Error al ingresar")
+            print(e)
+            print("Error al ingresar")
 
         idtxt.value=""
         nametxt.value =""
@@ -88,34 +88,35 @@ def main(page: ft.Page):
 
     def datos_incompletos():
         page.snack_bar = ft.SnackBar(
-                    ft.Text("Por favor ingrese todos los campos requeridos", size =30),
-                    bgcolor="orange"
-            )
+            ft.Text("Por favor ingrese todos los campos requeridos", size =30),
+            bgcolor="orange"
+        )
         page.snack_bar.open = True
         page.update()
 
     def indentificacion_mal():
         page.snack_bar = ft.SnackBar(
-                    ft.Text("la identificacion debe ser un número entero positivo", size =30),
-                    bgcolor="orange"
-            )
+            ft.Text("la identificacion debe ser un número entero positivo", size =30),
+            bgcolor="orange"
+        )
         page.snack_bar.open = True
         page.update()        
 
     def nomapel_mal():
-            page.snack_bar = ft.SnackBar(
-                        ft.Text("Nombre y apellido solo deben contener letras", size =30),
-                        bgcolor="orange"
-                )
-            page.snack_bar.open = True
-            page.update()
+        page.snack_bar = ft.SnackBar(
+            ft.Text("Nombre y apellido solo deben contener letras", size =30),
+            bgcolor="orange"
+        )
+        page.snack_bar.open = True
+        page.update()
+
     def id_existente():
-            page.snack_bar = ft.SnackBar(
-                        ft.Text("Ya hay un registro con la misma identificacion", size =30),
-                        bgcolor="orange"
-                )
-            page.snack_bar.open = True
-            page.update()    
+        page.snack_bar = ft.SnackBar(
+            ft.Text("Ya hay un registro con la misma identificacion", size =30),
+            bgcolor="orange"
+        )
+        page.snack_bar.open = True
+        page.update()    
 
 #pestaña login
     signup= ft.Container(
@@ -130,7 +131,7 @@ def main(page: ft.Page):
                     width=300,
                     margin=ft.margin.only(left=170,right=10,top=10),
                     content=ft.TextButton(
-                        "Rover Crop",
+                        "RoverCrop",
                         style=ft.ButtonStyle(
                             color='green'
                         )
@@ -148,45 +149,49 @@ def main(page: ft.Page):
                 ),
                 ft.Container(
                         ft.Row(
-                             controls=[
-                                   idtxt,
-                                    nametxt,
-                                    lastnatxt,
-                            ])
-                            ),
-                ft.Container(
-                     ft.Row(
                             controls=[
-                                fech,
-                                anotxt,
-                                mestxt,
-                                diatxt, 
-                            ])),
-                ft.Container(            
-                        ft.Row(
-                            controls=[
-                                profesitxt,
-                                genetxt, 
-                                
+                                idtxt,
+                                nametxt,
+                                lastnatxt,
                             ]
-                        )),
-                ft.Container(        
-                        ft.Row(
-                            controls=[
-                                usuariotxt,
-                                contrasenatxt
-                            ])),
+                        )
+                ),
                 ft.Container(
-                             ft.Row(
-                            controls=[
-                                ft.ElevatedButton("Guardar", on_click=addtodb),
-                        ]))
-                   
+                    ft.Row(
+                        controls=[
+                            fech,
+                            anotxt,
+                            mestxt,
+                            diatxt, 
+                        ]
+                    )
+                ),
+                ft.Container(            
+                    ft.Row(
+                        controls=[
+                            profesitxt,
+                            genetxt,
+                        ]
+                    )
+                ),
+                ft.Container(        
+                    ft.Row(
+                        controls=[
+                            usuariotxt,
+                            contrasenatxt
+                        ]
+                    )
+                ),
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.ElevatedButton("Guardar", on_click=addtodb),
+                        ]
+                    )
+                )
             ]
         )
-        )
-
-    
+    )
 
 #pestaña simulacion
     simulacion= ft.Container(
@@ -201,7 +206,7 @@ def main(page: ft.Page):
                     width=300,
                     margin=ft.margin.only(left=170,right=10,top=10),
                     content=ft.TextButton(
-                        "Rover Crop",
+                        "RoverCrop",
                         style=ft.ButtonStyle(
                             color='green'
                         )
@@ -216,44 +221,43 @@ def main(page: ft.Page):
                         color="#000000",
                         weight='w700'
                     )
-                    ),
-                ft.Container(
-                     ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\limoso.PNG", width=150, height=100),
-                      terrenotxt
-                      ])
-                     
-                ),
-                ft.Container(
-                     ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\cultivo.PNG", width=150, height=100),
-                      cultivotxt
-                      
-                   ]),
                 ),
                 ft.Container(
                     ft.Row(
-                   controls=[
-                      ft.Image(src="prueba\imagenes\estructura.PNG", width=150, height=100),
-                      estructuratxt,   
-                   ]),
-                     
+                        controls=[
+                            ft.Image(src="prueba\imagenes\limoso.PNG", width=150, height=100),
+                            terrenotxt
+                        ]
+                    )
+                ),
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.Image(src="prueba\imagenes\cultivo.PNG", width=150, height=100),
+                            cultivotxt
+                        ]
+                    ),
+                ),
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.Image(src="prueba\imagenes\estructura.PNG", width=150, height=100),
+                            estructuratxt,   
+                        ]
+                    ),
                 ),
                 ft.Container(
                     ft.Row( 
-                   controls=[
-                      
-                      ft.ElevatedButton("ver simulación"),
-                      
-                      
-                   ]),
-                     
+                        controls=[
+                            ft.ElevatedButton("ver simulación"),
+                        ]
+                    ),
                 ),    
             ]
-        ))
-    
+        )
+    )
+
+
 #pestaña principal 
     body = ft.Container(
         width=1000,
