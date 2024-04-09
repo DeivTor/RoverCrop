@@ -200,57 +200,74 @@ def main(page: ft.Page):
         bgcolor="#ffffff",
         border_radius= 10,
         content=ft.Column(
-            width=320,
+            width=659,
+            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
-                    margin=ft.margin.only(left=170,right=10,top=10),
-                    content=ft.TextButton(
-                        "RoverCrop",
-                        style=ft.ButtonStyle(
-                            color='green'
-                        )
-                    )
-                ),
-                ft.Container(
-                    width=300,
-                    margin=ft.margin.only(left=110,right=10,top=25),
                     content=ft.Text(
                         "Simulación",
-                        size=30,
+                        text_align=ft.TextAlign.CENTER,
+                        size=40,
                         color="#000000",
                         weight='w700'
                     )
                 ),
+
                 ft.Container(
-                    ft.Row(
+                    margin=ft.margin.only(top=50),
+                    content=ft.Row(
                         controls=[
-                            ft.Image(src="prueba\imagenes\limoso.PNG", width=150, height=100),
+                            ft.Container(
+                                margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
+                                content=ft.Image(src="interfaz\\imagenes\\superficie.PNG", width=70, height=70)
+                            ),
                             terrenotxt
-                        ]
+                        ],
+                        spacing=30
                     )
                 ),
                 ft.Container(
-                    ft.Row(
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
                         controls=[
-                            ft.Image(src="prueba\imagenes\cultivo.PNG", width=150, height=100),
+                            ft.Container(
+                                margin=ft.margin.only(left=30),
+                                content=ft.Image(src="interfaz\imagenes\cultivo.PNG", width=60, height=60),
+                            ),
                             cultivotxt
-                        ]
+                        ],
+                        spacing=30
                     ),
                 ),
                 ft.Container(
-                    ft.Row(
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
                         controls=[
-                            ft.Image(src="prueba\imagenes\estructura.PNG", width=150, height=100),
-                            estructuratxt,   
-                        ]
+                            ft.Container(
+                                margin=ft.margin.only(left=30),
+                                content=ft.Image(src="interfaz\\imagenes\\estructura.PNG", width=60, height=60),
+                            ),
+                            estructuratxt,
+                        ],
+                        spacing=30
                     ),
                 ),
                 ft.Container(
-                    ft.Row( 
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
                         controls=[
-                            ft.ElevatedButton("ver simulación"),
-                        ]
+                            ft.ElevatedButton(
+                                "Ver simulación",
+                                style=ft.ButtonStyle(
+                                    color={ft.MaterialState.DEFAULT: ft.colors.GREEN},
+                                    padding={ft.MaterialState.HOVERED: 20},
+                                    elevation={"pressed": 0, "": 1},
+                                    animation_duration=500,
+                                )
+                            )
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER
                     ),
                 ),    
             ]
