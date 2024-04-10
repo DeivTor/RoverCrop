@@ -42,7 +42,7 @@ def main(page: ft.Page):
                 raise ValueError("la identificacion debe ser un número valido", indentificacion_mal())
 
             if not all(x.isalpha() for x in nametxt.value) or not all(x.isalpha() for x in lastnatxt.value):
-                raise ValueError("Nombre y apellido solo deben contener letras", nomapel_mal())
+                raise ValueError("Nombre y apellido solo deben contener letras", nombreApell_mal())
             
             cursor.execute("SELECT * FROM usuario WHERE id = %s", (idtxt.value,))
             user = cursor.fetchone()
@@ -90,7 +90,7 @@ def main(page: ft.Page):
     def datos_incompletos():
         page.snack_bar = ft.SnackBar(
             ft.Text("Por favor ingrese todos los campos requeridos", size =30),
-            bgcolor="orange"
+            bgcolor="red"
         )
         page.snack_bar.open = True
         page.update()
@@ -98,15 +98,15 @@ def main(page: ft.Page):
     def indentificacion_mal():
         page.snack_bar = ft.SnackBar(
             ft.Text("la identificacion debe ser un número entero positivo", size =30),
-            bgcolor="orange"
+            bgcolor="red"
         )
         page.snack_bar.open = True
         page.update()        
 
-    def nomapel_mal():
+    def nombreApell_mal():
         page.snack_bar = ft.SnackBar(
             ft.Text("Nombre y apellido solo deben contener letras", size =30),
-            bgcolor="orange"
+            bgcolor="red"
         )
         page.snack_bar.open = True
         page.update()
@@ -114,7 +114,7 @@ def main(page: ft.Page):
     def id_existente():
         page.snack_bar = ft.SnackBar(
             ft.Text("Ya hay un registro con la misma identificacion", size =30),
-            bgcolor="orange"
+            bgcolor="red"
         )
         page.snack_bar.open = True
         page.update()    
@@ -285,7 +285,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
-                                content=ft.Image(src="imagenes\superficie.PNG", width=70, height=70)
+                                content=ft.Image(src="\imagenes\superficie.PNG", width=70, height=70)
                             ),
                             terrenotxt
                         ],
@@ -298,7 +298,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="imagenes\cultivo.PNG", width=60, height=60),
+                                content=ft.Image(src="\imagenes\cultivo.PNG", width=60, height=60),
                             ),
                             cultivotxt
                         ],
@@ -311,7 +311,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="imagenes\estructura.PNG", width=60, height=60),
+                                content=ft.Image(src="\imagenes\estructura.PNG", width=60, height=60),
                             ),
                             estructuratxt,
                         ],
