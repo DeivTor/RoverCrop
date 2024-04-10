@@ -1,11 +1,19 @@
 import flet as ft
+from flet import *
 
 snack_bar = ft.SnackBar
 
 #Ingreso de correo
 usuariotxt = ft.TextField(
     label="Correo",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     width=500,
     height=55,
@@ -16,7 +24,14 @@ usuariotxt = ft.TextField(
 
 idtxt = ft.TextField(
     label="Identificación",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     width=130,
     height=50, 
@@ -25,7 +40,14 @@ idtxt = ft.TextField(
 
 nametxt = ft.TextField(
     label="Nombre",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     width=170,
     height=50, 
@@ -34,7 +56,14 @@ nametxt = ft.TextField(
 
 lastnatxt = ft.TextField(
     label="Apellido",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     width=170,
     height=50, 
@@ -45,35 +74,53 @@ lastnatxt = ft.TextField(
 
 ano = ["1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006"]
 anotxt = ft.Dropdown(
-    label="Año", 
-    border_color="#080808",
+    label="Año",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
     border_radius=20,
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     options=[ft.dropdown.Option(opcion) for opcion in ano],
     width=150,
     height=60,
-    color='gray'
 )
 
 mes = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 mestxt = ft.Dropdown(
-    label="Mes", 
-    border_color="#080808",
+    label="Mes",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    border_color=colors.BLACK,
     border_radius=20,
+    focused_border_color=colors.GREEN_700,
     options=[ft.dropdown.Option(opcion) for opcion in mes],
     width=150,
-    height=60, 
-    color='gray'
+    height=60
 )
 
 dia = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
 diatxt = ft.Dropdown(
     label="Día", 
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in dia],
     width=150,
-    height=60, 
-    color='gray'
+    height=60
 )
 
 scroll = "always",
@@ -82,8 +129,15 @@ scroll = "always",
 
 opciones_genero = ["Masculino", "Femenino", "Otro"]
 genetxt = ft.Dropdown(
-    label ="Genero", 
-    border_color="#080808",
+    label ="Genero",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options = [ft.dropdown.Option(opcion) for opcion in opciones_genero],
     width=240,
@@ -95,8 +149,15 @@ genetxt = ft.Dropdown(
 
 opciones_ocupacion = ["Estudiante", "Profesor", "Otro"]
 profesitxt = ft.Dropdown(
-    label="Profesión", 
-    border_color="#080808",
+    label="Profesión",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in opciones_ocupacion],
     width=240,
@@ -107,7 +168,14 @@ profesitxt = ft.Dropdown(
 #Ingreso de contraseña
 contrasenatxt = ft.TextField(
     label="Crea una contraseña",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     width=500,
     height=60, 
@@ -122,7 +190,14 @@ terrenos = ["Limoso", "Franco"]
 
 terrenotxt = ft.Dropdown(
     label="Terreno",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in terrenos],
     width=400,
@@ -135,7 +210,14 @@ cultivos = ["Zanahoria", "Papa"]
 
 cultivotxt = ft.Dropdown(
     label="Cultivo",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in cultivos],
     width=400,
@@ -148,7 +230,14 @@ estructuras = ["Oruga", "Convencional"]
 
 estructuratxt = ft.Dropdown(
     label="Estructura",
-    border_color="#080808",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color="#000000",
+    ),
+    border_color=colors.BLACK,
+    focused_border_color=colors.GREEN_700,
     border_radius=20,
     options=[ft.dropdown.Option(opcion) for opcion in estructuras],
     width=400,

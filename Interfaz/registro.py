@@ -1,4 +1,5 @@
 import flet as ft
+from flet import *
 from conbd import *
 from variables import *
 
@@ -230,7 +231,25 @@ def main(page: ft.Page):
                 ft.Container(
                     ft.Row(
                         controls=[
-                            ft.ElevatedButton("Guardar", on_click=addtodb),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=ft.ElevatedButton(
+                                    "Guardar",
+                                    width=250,
+                                    height=50,
+                                    style=ButtonStyle(
+                                        color="#ffffff",
+                                        bgcolor=colors.GREEN_700,
+                                        shape={
+                                            ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
+                                            ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
+                                        }
+                                    ),
+                                    on_click=addtodb
+                                ),
+                                margin=ft.margin.symmetric(horizontal=200),
+                                padding=ft.padding.only(top=20)
+                            )
                         ]
                     )
                 )
@@ -261,12 +280,12 @@ def main(page: ft.Page):
                 ),
 
                 ft.Container(
-                    margin=ft.margin.only(top=50),
+                    margin=ft.margin.only(top=25),
                     content=ft.Row(
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
-                                content=ft.Image(src="interfaz\\imagenes\\superficie.PNG", width=70, height=70)
+                                content=ft.Image(src="imagenes\superficie.PNG", width=70, height=70)
                             ),
                             terrenotxt
                         ],
@@ -279,7 +298,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="interfaz\imagenes\cultivo.PNG", width=60, height=60),
+                                content=ft.Image(src="imagenes\cultivo.PNG", width=60, height=60),
                             ),
                             cultivotxt
                         ],
@@ -292,7 +311,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="interfaz\\imagenes\\estructura.PNG", width=60, height=60),
+                                content=ft.Image(src="imagenes\estructura.PNG", width=60, height=60),
                             ),
                             estructuratxt,
                         ],
@@ -300,22 +319,29 @@ def main(page: ft.Page):
                     ),
                 ),
                 ft.Container(
-                    margin=ft.margin.only(top=20),
-                    content=ft.Row(
+                    ft.Row(
                         controls=[
-                            ft.ElevatedButton(
-                                "Ver simulación",
-                                style=ft.ButtonStyle(
-                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE70},
-                                    padding={ft.MaterialState.HOVERED: 20},
-                                    elevation={"pressed": 0, "": 1},
-                                    animation_duration=5000000,
-                                )
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=ft.ElevatedButton(
+                                    "Ver simulación",
+                                    width=250,
+                                    height=50,
+                                    style=ButtonStyle(
+                                        color="#ffffff",
+                                        bgcolor=colors.GREEN_700,
+                                        shape={
+                                            ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
+                                            ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
+                                        }
+                                    ),
+                                ),
+                                margin=ft.margin.symmetric(horizontal=200),
+                                padding=ft.padding.only(top=20)
                             )
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER
-                    ),
-                ),    
+                        ]
+                    )
+                )
             ],
         )
     )

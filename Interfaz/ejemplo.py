@@ -51,7 +51,6 @@ def main(page: Page):
                             usuariotxt(
                                 text_style=TextStyle(
                                     color="#000000",
-
                                 ),
                                 border_radius=15,
                                 border_color=colors.BLACK,
@@ -102,8 +101,6 @@ def main(page: Page):
                             shape={
                                 MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
                                 MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
-                         
-
                             },
                             padding=20,
                         ),
