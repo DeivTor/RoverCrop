@@ -123,64 +123,109 @@ def main(page: ft.Page):
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 10,
+        border_radius= 30,
         content=ft.Column(
-            width=320,
+            width=500,
+            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
-                    margin=ft.margin.only(left=170,right=10,top=10),
-                    content=ft.TextButton(
-                        "RoverCrop",
-                        style=ft.ButtonStyle(
-                            color='green'
-                        )
-                    )
-                ),
-                ft.Container(
-                    width=300,
-                    margin=ft.margin.only(left=110,right=10,top=25),
+                    margin=ft.margin.only(top=70, bottom=30),
                     content=ft.Text(
                         "Registro",
-                        size=30,
+                        text_align=ft.TextAlign.CENTER,
+                        size=40,
                         color="#000000",
                         weight='w700'
                     )
                 ),
-                ft.Container(
-                        ft.Row(
-                            controls=[
-                                idtxt,
-                                nametxt,
-                                lastnatxt,
-                            ]
-                        )
-                ),
+                #Correo
                 ft.Container(
                     ft.Row(
                         controls=[
-                            fech,
-                            anotxt,
-                            mestxt,
-                            diatxt, 
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                margin=ft.margin.symmetric(horizontal=20),
+                                content= usuariotxt
+                            )
                         ]
-                    )
+                    ),
+                    margin=ft.margin.symmetric(horizontal=50)
                 ),
+                #Datos personales
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= idtxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= nametxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content= lastnatxt
+                            )
+                        ],
+                        alignment = ft.CrossAxisAlignment.CENTER,
+                        spacing=15
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                # Ocupacion - Genero
                 ft.Container(            
                     ft.Row(
                         controls=[
-                            profesitxt,
-                            genetxt,
-                        ]
-                    )
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=profesitxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=genetxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=20
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
                 ),
+                # Fecha de nacimiento
+                ft.Container(
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=anotxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=mestxt
+                            ),
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=diatxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=23
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
+                ),
+                # Contrasena
                 ft.Container(        
                     ft.Row(
                         controls=[
-                            usuariotxt,
-                            contrasenatxt
-                        ]
-                    )
+                            ft.Container(
+                                alignment=ft.alignment.center,
+                                content=contrasenatxt
+                            )
+                        ],
+                        alignment=ft.CrossAxisAlignment.CENTER,
+                    ),
+                    margin=ft.margin.symmetric(horizontal=70)
                 ),
                 ft.Container(
                     ft.Row(
@@ -190,7 +235,7 @@ def main(page: ft.Page):
                     )
                 )
             ]
-        )
+        ),
     )
 
 #pestaña simulacion
@@ -198,13 +243,14 @@ def main(page: ft.Page):
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 10,
+        border_radius= 30,
         content=ft.Column(
             width=659,
             horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
+                    margin=ft.margin.only(top=70),
                     content=ft.Text(
                         "Simulación",
                         text_align=ft.TextAlign.CENTER,
@@ -260,17 +306,17 @@ def main(page: ft.Page):
                             ft.ElevatedButton(
                                 "Ver simulación",
                                 style=ft.ButtonStyle(
-                                    color={ft.MaterialState.DEFAULT: ft.colors.GREEN},
+                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE70},
                                     padding={ft.MaterialState.HOVERED: 20},
                                     elevation={"pressed": 0, "": 1},
-                                    animation_duration=500,
+                                    animation_duration=5000000,
                                 )
                             )
                         ],
                         alignment=ft.MainAxisAlignment.CENTER
                     ),
                 ),    
-            ]
+            ],
         )
     )
 
