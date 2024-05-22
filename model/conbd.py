@@ -6,11 +6,11 @@ from controller import registro
 
 
 conexion = mysql.connector.connect(
-    host='localhost',
-    port=3306,
+    host='viaduct.proxy.rlwy.net',
+    port=29448,
     user='root',
-    password='12345',
-    db='rovercrop'
+    password='dtfIIWhdoWxAIsggsNIasDyomTSeOQCG',
+    db='railway'
     )
 
 cursor = conexion.cursor()

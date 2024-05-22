@@ -35,7 +35,7 @@ class Registro:
             if user:
                 raise ValueError("Ya existe un usuario con el mismo ID", self.id_existente())
 
-            sql = "INSERT INTO usuario (id, nombre, apellido, fecha_nacimiento, genero, ocupacion, nombre_usuario, contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s, AES_ENCRYPT(%s, 'Yk468Fd'))"
+            sql = "INSERT INTO usuario (id, nombre, apellido, fecha_nacimiento, genero, ocupacion, nombre_usuario, contrasena) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             fecha_nacimiento = f"{self.anotxt.value}-{self.mestxt.value}-{self.diatxt.value}"
             val = (self.idtxt.value, self.nametxt.value, self.lastnatxt.value, fecha_nacimiento, self.genetxt.value, self.profesitxt.value, self.usuariotxt.value, self.contrasenatxt.value)
 
