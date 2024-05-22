@@ -1,6 +1,7 @@
 import flet as ft
 from flet import *
 
+
 snack_bar = ft.SnackBar
 
 #Ingreso de correo
@@ -253,4 +254,3 @@ estructuratxt = ft.Dropdown(
     width=400,
     height=60
 )
-

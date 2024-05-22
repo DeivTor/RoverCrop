@@ -1,20 +1,27 @@
 import flet as ft
 from flet import *
-import controller.control as cc
-from controller.variables import *
+from model import conbd
+from view import variables
+from controller import registro
+
 
 def main(page: ft.Page):
     page.title = "RoverCrop"
 
-    #pestaña login
-    signup= ft.Container(
+    # Inicializar la instancia de Registro
+    conexion = conbd.conexion
+    cursor = conbd.cursor
+    registro_controller = registro.Registro(page, cursor, conexion)
+
+    # Pestaña login
+    signup = ft.Container(
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 30,
+        border_radius=30,
         content=ft.Column(
             width=500,
-            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
@@ -27,52 +34,52 @@ def main(page: ft.Page):
                         weight='w700'
                     )
                 ),
-                #Correo
+                # Correo
                 ft.Container(
                     ft.Row(
                         controls=[
                             ft.Container(
                                 alignment=ft.alignment.center,
                                 margin=ft.margin.symmetric(horizontal=20),
-                                content= usuariotxt
+                                content=variables.usuariotxt
                             )
                         ]
                     ),
                     margin=ft.margin.symmetric(horizontal=50)
                 ),
-                #Datos personales
+                # Datos personales
                 ft.Container(
                     ft.Row(
                         controls=[
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content= idtxt
+                                content=variables.idtxt
                             ),
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content= nametxt
+                                content=variables.nametxt
                             ),
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content= lastnatxt
+                                content=variables.lastnatxt
                             )
                         ],
-                        alignment = ft.CrossAxisAlignment.CENTER,
+                        alignment=ft.CrossAxisAlignment.CENTER,
                         spacing=15
                     ),
                     margin=ft.margin.symmetric(horizontal=70)
                 ),
                 # Ocupacion - Genero
-                ft.Container(            
+                ft.Container(
                     ft.Row(
                         controls=[
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=profesitxt
+                                content=variables.profesitxt
                             ),
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=genetxt
+                                content=variables.genetxt
                             )
                         ],
                         alignment=ft.CrossAxisAlignment.CENTER,
@@ -86,15 +93,15 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=anotxt
+                                content=variables.anotxt
                             ),
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=mestxt
+                                content=variables.mestxt
                             ),
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=diatxt
+                                content=variables.diatxt
                             )
                         ],
                         alignment=ft.CrossAxisAlignment.CENTER,
@@ -103,12 +110,12 @@ def main(page: ft.Page):
                     margin=ft.margin.symmetric(horizontal=70)
                 ),
                 # Contrasena
-                ft.Container(        
+                ft.Container(
                     ft.Row(
                         controls=[
                             ft.Container(
                                 alignment=ft.alignment.center,
-                                content=contrasenatxt
+                                content=variables.contrasenatxt
                             )
                         ],
                         alignment=ft.CrossAxisAlignment.CENTER,
@@ -132,7 +139,7 @@ def main(page: ft.Page):
                                             ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
                                         }
                                     ),
-                                    on_click=cc.addtodb()
+                                    on_click=lambda _: registro_controller.addtodb()
                                 ),
                                 margin=ft.margin.symmetric(horizontal=200),
                                 padding=ft.padding.only(top=20)
@@ -144,15 +151,15 @@ def main(page: ft.Page):
         ),
     )
 
-    #pestaña simulacion
-    simulacion= ft.Container(
+    # Pestaña simulacion
+    simulacion = ft.Container(
         width=659,
         height=750,
         bgcolor="#ffffff",
-        border_radius= 30,
+        border_radius=30,
         content=ft.Column(
             width=659,
-            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     width=300,
@@ -171,10 +178,10 @@ def main(page: ft.Page):
                     content=ft.Row(
                         controls=[
                             ft.Container(
-                                margin=ft.margin.only(left=20),  # Aplicar margen al contenedor
-                                content=ft.Image(src="proyect\img\superficie.PNG", width=70, height=70)
+                                margin=ft.margin.only(left=20),
+                                content=ft.Image(src="proyect/img/superficie.png", width=70, height=70)
                             ),
-                            terrenotxt
+                            variables.terrenotxt
                         ],
                         spacing=30
                     )
@@ -185,9 +192,9 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="proyect\img\cultivo.PNG", width=60, height=60),
+                                content=ft.Image(src="proyect/img/cultivo.png", width=60, height=60),
                             ),
-                            cultivotxt
+                            variables.cultivotxt
                         ],
                         spacing=30
                     ),
@@ -198,9 +205,9 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="proyect\img\estructura.PNG", width=60, height=60),
+                                content=ft.Image(src="proyect/img/estructura.png", width=60, height=60),
                             ),
-                            estructuratxt,
+                            variables.estructuratxt,
                         ],
                         spacing=30
                     ),
@@ -233,8 +240,7 @@ def main(page: ft.Page):
         )
     )
 
-
-    #pestaña principal 
+    # Pestaña principal
     body = ft.Container(
         width=1000,
         height=620,
@@ -245,9 +251,8 @@ def main(page: ft.Page):
             ]
         )
     )
-        
-    page.add(body)
 
+    page.add(body)
 
 
 ft.app(target=main)
