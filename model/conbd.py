@@ -9,7 +9,7 @@ conexion = mysql.connector.connect(
     host='localhost',
     port=3306,
     user='root',
-    password='rozo1022',
+    password='12345',
     db='rovercrop'
     )
 
