@@ -179,7 +179,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),
-                                content=ft.Image(src="proyect/img/superficie.png", width=70, height=70)
+                                content=ft.Image(src="img/superficie.png", width=70, height=70)
                             ),
                             variables.terrenotxt
                         ],
@@ -192,7 +192,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="proyect/img/cultivo.png", width=60, height=60),
+                                content=ft.Image(src="img/cultivo.png", width=60, height=60),
                             ),
                             variables.cultivotxt
                         ],
@@ -205,7 +205,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="proyect/img/estructura.png", width=60, height=60),
+                                content=ft.Image(src="img/estructura.png", width=60, height=60),
                             ),
                             variables.estructuratxt,
                         ],

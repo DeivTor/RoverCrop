@@ -1,4 +1,5 @@
 import flet as ft
+import re
 from model import conbd
 from view import variables
 
@@ -23,6 +24,9 @@ class Registro:
         try:
             if not self.idtxt.value or not self.nametxt.value or not self.lastnatxt.value or not self.anotxt.value or not self.mestxt.value or not self.diatxt.value or not self.genetxt.value or not self.profesitxt.value or not self.usuariotxt.value or not self.contrasenatxt.value:
                 raise ValueError("Por favor ingrese todos los campos requeridos", self.datos_incompletos())
+
+            if not re.match(r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]+$', self.usuariotxt.value):
+                raise ValueError("Por favor ingrese un correo electrónico válido", self.correo_invalido())
 
             if not self.idtxt.value.isdigit():
                 raise ValueError("la identificación debe ser un número válido", self.identificacion_mal())
@@ -72,6 +76,14 @@ class Registro:
         self.usuariotxt.value = ""
         self.contrasenatxt.value = ""
 
+    def correo_invalido (self):
+        self.page.snack_bar = ft.SnackBar(
+            ft.Text("Por favor ingrese un correo valido", size=30),
+            bgcolor="red"
+        )
+        self.page.snack_bar.open = True
+        self.page.update()
+
     def datos_incompletos(self):
         self.page.snack_bar = ft.SnackBar(
             ft.Text("Por favor ingrese todos los campos requeridos", size=30),
@@ -80,7 +92,7 @@ class Registro:
         self.page.snack_bar.open = True
         self.page.update()
 
-    def indentificacion_mal(self):
+    def identificacion_mal(self):
         self.page.snack_bar = ft.SnackBar(
             ft.Text("la identificacion debe ser un número entero positivo", size=30),
             bgcolor="red"
