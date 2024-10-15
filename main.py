@@ -3,9 +3,8 @@ from flet import *
 from model import conbd
 from view import variables
 from controller import registro
-from controller.simulacion import Simulacion  # Asegúrate de que la clase Simulacion está bien definida
-import threading
-import pygame, sys, time, random
+from controller.simulacion import Simulacion  
+
 
 def main(page: ft.Page):
     page.title = "RoverCrop"
@@ -268,7 +267,7 @@ def main(page: ft.Page):
             start_game_button.disabled = False
         else:
             start_game_button.disabled = True
-        start_game_button.update()  # Importante: actualizar el estado del botón
+        start_game_button.update()  # Se actualiza el estado del botón 
 
 
 

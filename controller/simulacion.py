@@ -8,17 +8,25 @@ class Simulacion:
     def __init__(self, page):
         self.page = page
 
+    def limpiar_dropdowns(self):
+        variables.terrenotxt.value = ""
+        variables.cultivotxt.value = ""
+        variables.estructuratxt.value = ""
+        self.page.update()
+
     def TipoSimulacion(self, e=None):
-        # Verificación de que todas las variables necesarias están completas
         if not variables.terrenotxt.value or not variables.cultivotxt.value or not variables.estructuratxt.value:
             self.dato_incompletos()
         else:
             print("Todos los campos seleccionados. Iniciando simulación.")
-            threading.Thread(target=self.run_pygame).start()
+            # Pasar las selecciones a la función de simulación
+            threading.Thread(target=self.run_pygame, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+            self.limpiar_dropdowns()
 
 
     def dato_incompletos(self):
-        print("Faltan campos por completar")  # Esto debería aparecer en la consola si faltan campos
+        print("Faltan campos por completar")  
+        # Esto debería aparecer en la consola si faltan campos
         snack = ft.SnackBar(
             content=ft.Text("Por favor ingrese todos los campos requeridos", size=30),
             bgcolor="red"
@@ -28,7 +36,7 @@ class Simulacion:
         self.page.update()  # Asegúrate de actualizar la página
 
 
-    def run_pygame(self):
+    def run_pygame(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
         
@@ -51,7 +59,7 @@ class Simulacion:
         font = pygame.font.Font(None, 30)
         fps = pygame.time.Clock()
 
-        class Snake:
+        class Rover:
             def __init__(self, x, y):
                 self.x = x
                 self.y = y
@@ -86,7 +94,7 @@ class Simulacion:
             {'direction': 'up', 'steps': 50},
         ]
 
-        snake = Snake(250, 250)
+        rover = Rover(250, 250)
         step_index = 0
         step_count = 0
 
@@ -108,8 +116,13 @@ class Simulacion:
             elapsed_text = font.render(f'Tiempo: {int(elapsed_time)} s', True, (255, 255, 255))
             screen.blit(elapsed_text, (10, 10))
 
+            # Mostrar elección del usuario 
+            selections_text = f'Estructura: {estructura}   Cultivo: {cultivo}   Terreno: {terreno}'
+            selections_render = font.render(selections_text, True, (255, 255, 255))
+            screen.blit(selections_render, (10 + elapsed_text.get_width() + 80, 20)) #Mover posicion a la derecha
+
             if step_count < path[step_index]['steps']:
-                snake.direction = path[step_index]['direction']
+                rover.direction = path[step_index]['direction']
                 step_count += 1
             else:
                 step_index += 1
@@ -117,8 +130,8 @@ class Simulacion:
                 if step_index >= len(path):
                     run = False
 
-            snake.move()
-            snake.draw(screen)  # Dibujar la serpiente
+            rover.move()
+            rover.draw(screen)  # Dibujar la serpiente
             pygame.display.flip()  # Actualizar la pantalla
             fps.tick(10)
 
