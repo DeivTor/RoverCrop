@@ -1,12 +1,15 @@
 import flet as ft 
-from view import variables
 import threading
 import pygame
 import time
+from view import variables
+from controller.tipo_simulacion import Tipo_simulaciones
 
 class Simulacion:
     def __init__(self, page):
         self.page = page
+        self.Tipo_simulaciones = Tipo_simulaciones(self)
+
 
     def limpiar_dropdowns(self):
         variables.terrenotxt.value = ""
@@ -19,11 +22,18 @@ class Simulacion:
             self.dato_incompletos()
         else:
             print("Todos los campos seleccionados. Iniciando simulación.")
-            # Pasar las selecciones a la función de simulación
-            threading.Thread(target=self.run_pygame, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+            
+            # Verificar el terreno seleccionado
+            if variables.terrenotxt.value == "Limoso":
+                threading.Thread(target=self.Tipo_simulaciones.simulacion1, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+            elif variables.terrenotxt.value == "Franco":
+                threading.Thread(target=self.Tipo_simulaciones.simulacion2, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+            else:
+                print("Terreno no válido. Por favor, seleccione un terreno válido.")
+            
             self.limpiar_dropdowns()
 
-
+ 
     def dato_incompletos(self):
         print("Faltan campos por completar")  
         # Esto debería aparecer en la consola si faltan campos
@@ -35,8 +45,8 @@ class Simulacion:
         self.page.snack_bar.open = True
         self.page.update()  # Asegúrate de actualizar la página
 
-
-    def run_pygame(self, terreno, cultivo, estructura):
+    
+    def simulacion1(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
         
@@ -50,10 +60,11 @@ class Simulacion:
 
         # Colores y configuración
         coffee_colors = [
-            (139, 69, 19),  # Marrón oscuro
-            (160, 82, 45),  # Marrón castaño
-            (205, 133, 63),  # Marrón arena
-        ]
+        (187, 151, 93),  # #BB975D
+        (192, 160, 104),  # #C0A068
+        (177, 133, 74),  # #B1854A
+        (172, 124, 64),  # #AC7C40
+    ]
 
         line_height = screen_height // len(coffee_colors)
         font = pygame.font.Font(None, 30)
@@ -108,8 +119,9 @@ class Simulacion:
 
             # Dibujar las líneas de colores
             for i, color in enumerate(coffee_colors):
-                y_position = i * line_height
-                pygame.draw.line(screen, color, (0, y_position), (screen_width, y_position), line_height)
+                rect_height = screen_height // len(coffee_colors)
+                rect_y = i * rect_height
+                pygame.draw.rect(screen, color, (0, rect_y, screen_width, rect_height))
 
             # Mostrar el tiempo transcurrido
             elapsed_time = time.time() - start_time
@@ -133,6 +145,6 @@ class Simulacion:
             rover.move()
             rover.draw(screen)  # Dibujar la serpiente
             pygame.display.flip()  # Actualizar la pantalla
-            fps.tick(10)
+            fps.tick(10)            
 
         pygame.quit()

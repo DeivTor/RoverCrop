@@ -236,7 +236,7 @@ def main(page: ft.Page):
                 simulacion
             ]
         )
-    )
+    ) 
 
     page.add(body)
 
@@ -261,4 +261,4 @@ def main(page: ft.Page):
     # Inicialmente deshabilitar el botón
     start_game_button.disabled = True
 
-ft.app(target=main)
+ft.app(target=main)  
