@@ -21,136 +21,118 @@ def main(page: ft.Page):
         bgcolor="#ffffff",
         border_radius=30,
         content=ft.Column(
-            width=500,
+            width=659,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
-                ft.Container(
+            ft.Container(
                     width=300,
-                    margin=ft.margin.only(top=70, bottom=30),
+                    margin=ft.margin.only(top=70),
                     content=ft.Text(
-                        "Registro",
+                        "Sign Up",
                         text_align=ft.TextAlign.CENTER,
                         size=40,
                         color="#000000",
                         weight='w700'
                     )
                 ),
-                # Correo
+                #Correo
                 ft.Container(
-                    ft.Row(
+                    margin=ft.margin.only(top=25),
+                    content=ft.Row(
                         controls=[
                             ft.Container(
-                                alignment=ft.alignment.center,
-                                margin=ft.margin.symmetric(horizontal=20),
-                                content=variables.usuariotxt
-                            )
-                        ]
-                    ),
-                    margin=ft.margin.symmetric(horizontal=50)
-                ),
-                # Datos personales
-                ft.Container(
-                    ft.Row(
-                        controls=[
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.idtxt
+                                margin=ft.margin.only(left=20),
+                                content=ft.Image(src="img/email.png", width=70, height=70)
                             ),
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.nametxt
-                            ),
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.lastnatxt
-                            )
+                            variables.usuariotxt
                         ],
-                        alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=15
-                    ),
-                    margin=ft.margin.symmetric(horizontal=70)
-                ),
-                # Ocupacion - Genero
-                ft.Container(
-                    ft.Row(
-                        controls=[
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.profesitxt
-                            ),
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.genetxt
-                            )
-                        ],
-                        alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=20
-                    ),
-                    margin=ft.margin.symmetric(horizontal=70)
-                ),
-                # Fecha de nacimiento
-                ft.Container(
-                    ft.Row(
-                        controls=[
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.anotxt
-                            ),
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.mestxt
-                            ),
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.diatxt
-                            )
-                        ],
-                        alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=23
-                    ),
-                    margin=ft.margin.symmetric(horizontal=70)
-                ),
-                # Contrasena
-                ft.Container(
-                    ft.Row(
-                        controls=[
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=variables.contrasenatxt
-                            )
-                        ],
-                        alignment=ft.CrossAxisAlignment.CENTER,
-                    ),
-                    margin=ft.margin.symmetric(horizontal=70)
-                ),
-                ft.Container(
-                    ft.Row(
-                        controls=[
-                            ft.Container(
-                                alignment=ft.alignment.center,
-                                content=ft.ElevatedButton(
-                                    "Guardar",
-                                    width=250,
-                                    height=50,
-                                    style=ButtonStyle(
-                                        color="#ffffff",
-                                        bgcolor=colors.GREEN_700,
-                                        shape={
-                                            ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
-                                            ft.MaterialState.HOVERED: RoundedRectangleBorder(radius=5),
-                                        }
-                                    ),
-                                    on_click=lambda _: registro_controller.addtodb()
-                                ),
-                                margin=ft.margin.symmetric(horizontal=200),
-                                padding=ft.padding.only(top=20)
-                            )
-                        ]
+                        spacing=30
                     )
+                ),
+                #Identificacion
+                ft.Container(
+                    margin=ft.margin.only(top=25),
+                    content=ft.Row(
+                        controls=[
+                            ft.Container(
+                                margin=ft.margin.only(left=20),
+                                content=ft.Image(src="img/iden.png", width=70, height=70)
+                            ),
+                            variables.idtxt
+                        ],
+                        spacing=30
+                    )
+                ),
+                
+                        
+            # Nombre Completo
+                ft.Container(
+                    margin=ft.margin.only(top=25),
+                    content=ft.Row(
+                        controls=[
+                            ft.Container(
+                                margin=ft.margin.only(left=20),
+                                content=ft.Image(src="img/usuario.png", width=70, height=70)
+                            ),
+                            variables.nametxt
+                        ],
+                        spacing=30
+                    )
+                ),
+            
+            # Género y Ocupación
+            ft.Container(
+                    margin=ft.margin.only(top=20),
+                    content=ft.Row(
+                        controls=[
+                        ft.Container(
+                             margin=ft.margin.only(left=20),
+                             content=ft.Image(src="img/genero.png", width=40, height=40)
+                        ),
+                        variables.genetxt,
+
+                        ft.Container(
+                             margin=ft.margin.only(left=20),
+                             content=ft.Image(src="img/ocupacion.png", width=40, height=40)
+                        ),
+                        variables.profesitxt,
+                    ],
+                    spacing=10,
+                    
                 )
-            ]
-        ),
+            ),
+            
+            # Botón guardar
+            ft.Container(
+                ft.Row(
+                    controls=[
+                        ft.Container(
+                            alignment=ft.alignment.center,
+                            content=ft.ElevatedButton(
+                                "Guardar",
+                                width=250,
+                                height=50,
+                                style=ButtonStyle(
+                                    color="#ffffff",
+                                    bgcolor=colors.GREEN_700,
+                                    shape={
+                                        ft.MaterialState.FOCUSED: RoundedRectangleBorder(radius=5),
+                                        ft.MaterialState.HOVERED: RoundedRectangleBorder(radius=5),
+                                    }
+                                ),
+                                on_click=lambda _: registro_controller.addtodb()
+                            ),
+                            margin=ft.margin.symmetric(horizontal=200),
+                            padding=ft.padding.only(top=20)
+                        )
+                    ]
+                )
+            )
+        ]
     )
+)
+
+
 
     # Crear el botón de iniciar simulación
     start_game_button = ft.ElevatedButton(

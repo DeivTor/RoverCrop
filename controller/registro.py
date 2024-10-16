@@ -11,18 +11,13 @@ class Registro:
         self.conexion = conexion
         self.idtxt = variables.idtxt
         self.nametxt = variables.nametxt
-        self.lastnatxt = variables.lastnatxt
-        self.anotxt = variables.anotxt
-        self.mestxt = variables.mestxt
-        self.diatxt = variables.diatxt
         self.genetxt = variables.genetxt
         self.profesitxt = variables.profesitxt
         self.usuariotxt = variables.usuariotxt
-        self.contrasenatxt = variables.contrasenatxt
 
     def addtodb(self):
         try:
-            if not self.idtxt.value or not self.nametxt.value or not self.lastnatxt.value or not self.anotxt.value or not self.mestxt.value or not self.diatxt.value or not self.genetxt.value or not self.profesitxt.value or not self.usuariotxt.value or not self.contrasenatxt.value:
+            if not self.idtxt.value or not self.nametxt.value or not self.genetxt.value or not self.profesitxt.value or not self.usuariotxt.value:
                 raise ValueError("Por favor ingrese todos los campos requeridos", self.datos_incompletos())
 
             if not re.match(r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]+$', self.usuariotxt.value):
@@ -31,17 +26,17 @@ class Registro:
             if not self.idtxt.value.isdigit():
                 raise ValueError("la identificación debe ser un número válido", self.identificacion_mal())
 
-            if not all(x.isalpha() for x in self.nametxt.value) or not all(x.isalpha() for x in self.lastnatxt.value):
-                raise ValueError("Nombre y apellido solo deben contener letras", self.nombreApell_mal())
+            if not all(x.isalpha() for x in self.nametxt.value):
+                raise ValueError("Nombre solo debe contener letras", self.nombre_mal())
 
             self.cursor.execute("SELECT * FROM usuario WHERE id = %s", (self.idtxt.value,))
             user = self.cursor.fetchone()
             if user:
                 raise ValueError("Ya existe un usuario con el mismo ID", self.id_existente())
 
-            sql = "INSERT INTO usuario (id, nombre, apellido, fecha_nacimiento, genero, ocupacion, nombre_usuario, contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            fecha_nacimiento = f"{self.anotxt.value}-{self.mestxt.value}-{self.diatxt.value}"
-            val = (self.idtxt.value, self.nametxt.value, self.lastnatxt.value, fecha_nacimiento, self.genetxt.value, self.profesitxt.value, self.usuariotxt.value, self.contrasenatxt.value)
+            sql = "INSERT INTO usuario (id, nombre, genero, ocupacion, nombre_usuario) VALUES (%s, %s, %s, %s, %s)"
+            val = (self.idtxt.value, self.nametxt.value, self.genetxt.value, self.profesitxt.value, self.usuariotxt.value)
+
 
             self.cursor.execute(sql, val)
             self.conexion.commit()
@@ -67,14 +62,9 @@ class Registro:
     def clear_fields(self):
         self.idtxt.value = ""
         self.nametxt.value = ""
-        self.lastnatxt.value = ""
-        self.anotxt.value = ""
-        self.mestxt.value = ""
-        self.diatxt.value = ""
         self.genetxt.value = ""
         self.profesitxt.value = ""
         self.usuariotxt.value = ""
-        self.contrasenatxt.value = ""
 
     def correo_invalido (self):
         self.page.snack_bar = ft.SnackBar(
