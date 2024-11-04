@@ -3,13 +3,14 @@ import flet as ft
 import pygame
 import time
 import math
+from view import variables
+
 
 class Tipo_simulaciones:
     def __init__(self, page):
         self.page = page
 
-    # Terreno: Franco, Estructura: convencional
-    def simulacion1(self, terreno, cultivo, estructura, tiempo):
+    def simulacion1(self, terreno, cultivo, estructura, tiempotxt):
         print("Simulación iniciada")
         pygame.init()
         
@@ -29,9 +30,6 @@ class Tipo_simulaciones:
             (83, 54, 0),     # #533600
         ]
 
-        # Seleccionar el color más oscuro
-        darkest_color = coffee_colors[-1]  # Último color en la lista (el más oscuro)
-
         line_height = screen_height // len(coffee_colors)
         font = pygame.font.Font(None, 30)
         fps = pygame.time.Clock()
@@ -41,9 +39,8 @@ class Tipo_simulaciones:
                 self.x = x
                 self.y = y
                 self.direction = 'right'
-                # Cargar la imagen del rover
                 self.image = pygame.image.load("img/convencional.png")
-                self.image = pygame.transform.scale(self.image, (100, 70))  # Ajustar tamaño de la imagen
+                self.image = pygame.transform.scale(self.image, (100, 70))
 
             def move(self):
                 if self.direction == 'right':
@@ -56,7 +53,6 @@ class Tipo_simulaciones:
                     self.y += 10
 
             def draw(self, screen):
-                # Girar la imagen según la dirección
                 if self.direction == 'right':
                     rotated_image = pygame.transform.rotate(self.image, 0)
                 elif self.direction == 'left':
@@ -65,8 +61,6 @@ class Tipo_simulaciones:
                     rotated_image = pygame.transform.rotate(self.image, 90)
                 elif self.direction == 'down':
                     rotated_image = pygame.transform.rotate(self.image, -90)
-                
-                # Dibujar la imagen en la posición actual del rover
                 screen.blit(rotated_image, (self.x, self.y))
 
         # Definición del camino del rover
@@ -85,45 +79,28 @@ class Tipo_simulaciones:
         step_index = 0
         step_count = 0
 
-        # Obtener la posición central de la pantalla
-        center_x, center_y = screen_width // 2, screen_height // 2
-
-        max_duration = tiempo
-
-        while run and (time.time()-start_time < max_duration):
+        max_duration = tiempotxt  # Asignar el tiempo total según tiempotxt
+        while run and (time.time() - start_time < max_duration):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
 
-            # Limpiar la pantalla
             screen.fill((0, 0, 0))
 
-            # Dibujar la grilla de cuadros de colores
-            cell_width, cell_height = 120, 90  # Tamaño de cada cuadro
-
+            cell_width, cell_height = 120, 90
             for row in range(0, screen_height, cell_height):
                 for col in range(0, screen_width, cell_width):
-                    # Calcular la distancia desde el centro de la pantalla
-                    distance = math.sqrt((col - center_x) ** 2 + (row - center_y) ** 2)
-                    # Normalizar la distancia para que esté dentro de los índices de los colores
-                    color_index = min(len(coffee_colors) - 1, int(distance // 50))  # 50 puede ajustarse para cambiar la intensidad
-                    color = coffee_colors[color_index]
+                    color = coffee_colors[(row // cell_height + col // cell_width) % len(coffee_colors)]
                     pygame.draw.rect(screen, color, (col, row, cell_width, cell_height))
-                    
-            # Colocar el color oscuro en el centro de la pantalla
-            pygame.draw.rect(screen, darkest_color, (center_x - cell_width // 2, center_y - cell_height // 2, cell_width, cell_height))
-
-            # Mostrar el tiempo transcurrido
+                                     
             elapsed_time = time.time() - start_time
             elapsed_text = font.render(f'Tiempo: {int(elapsed_time)} s', True, (255, 255, 255))
             screen.blit(elapsed_text, (10, 10))
 
-            # Mostrar elección del usuario
             selections_text = f'Estructura: {estructura}   Cultivo: {cultivo}   Terreno: {terreno}'
             selections_render = font.render(selections_text, True, (255, 255, 255))
-            screen.blit(selections_render, (10 + elapsed_text.get_width() + 80, 20))  # Mover posición a la derecha
+            screen.blit(selections_render, (10 + elapsed_text.get_width() + 80, 20))
 
-            # Mover el rover siguiendo el camino
             if step_count < path[step_index]['steps']:
                 rover.direction = path[step_index]['direction']
                 step_count += 1
@@ -134,8 +111,8 @@ class Tipo_simulaciones:
                     run = False
 
             rover.move()
-            rover.draw(screen)  # Dibujar el rover
-            pygame.display.flip()  # Actualizar la pantalla
+            rover.draw(screen)
+            pygame.display.flip()
             fps.tick(10)
 
         pygame.quit()

@@ -26,27 +26,48 @@ class Simulacion:
         self.cerrar_simulacion()  # Cierra los hilos al detener la simulación
 
     def TipoSimulacion(self, e=None):
-        if not variables.terrenotxt.value or not variables.cultivotxt.value or not variables.estructuratxt.value:
+        if not variables.terrenotxt.value or not variables.cultivotxt.value or not variables.estructuratxt.value or not variables.tiempotxt.value:
             self.dato_incompletos()
         else:
             print("Todos los campos seleccionados. Iniciando simulación.")
             self.iniciar_simulacion()
 
+            # Convertir tiempotxt a un número entero o flotante
+            try:
+                tiempotxt_value = int(variables.tiempotxt.value)  # Cambia a float() si esperas un valor decimal
+            except ValueError:
+                print("El tiempo debe ser un número válido.")
+                return
+
             # Verificar el terreno seleccionado
             if variables.terrenotxt.value == "Franco":
                 if variables.estructuratxt.value == "Convencional":
-                    threading.Thread(target=self. Tipo_simulaciones.simulacion1, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+                    threading.Thread(
+                        target=self.Tipo_simulaciones.simulacion1,
+                        args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)
+                    ).start()
                 elif variables.estructuratxt.value == "Oruga":
-                    threading.Thread(target=self.Tipo_simulaciones.simulacion2, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+                    threading.Thread(
+                        target=self.Tipo_simulaciones.simulacion2,
+                        args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)
+                    ).start()
             elif variables.terrenotxt.value == "Limoso":
                 if variables.estructuratxt.value == "Convencional":
-                    threading.Thread(target=self.Tipo_simulaciones.simulacion3, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+                    threading.Thread(
+                        target=self.Tipo_simulaciones.simulacion3,
+                        args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)
+                    ).start()
                 elif variables.estructuratxt.value == "Oruga":
-                    threading.Thread(target=self.Tipo_simulaciones.simulacion4, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+                    threading.Thread(
+                        target=self.Tipo_simulaciones.simulacion4,
+                        args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)
+                    ).start()
             else:
                 print("Terreno no válido. Por favor, seleccione un terreno válido.")
-                
+            
             self.limpiar_dropdowns()
+
+
 
     def cerrar_simulacion(self):
         # Esperar a que todos los hilos se detengan
