@@ -26,8 +26,9 @@ class Registro:
             if not self.idtxt.value.isdigit():
                 raise ValueError("la identificación debe ser un número válido", self.identificacion_mal())
 
-            if not all(x.isalpha() for x in self.nametxt.value):
-                raise ValueError("Nombre solo debe contener letras", self.nombre_mal())
+            if not all(x.isalpha() or x.isspace() for x in self.nametxt.value):
+                raise ValueError("Nombre solo debe contener letras y espacios", self.nombre_mal())
+
 
             self.cursor.execute("SELECT * FROM usuario WHERE id = %s", (self.idtxt.value,))
             user = self.cursor.fetchone()
@@ -90,7 +91,7 @@ class Registro:
         self.page.snack_bar.open = True
         self.page.update()
 
-    def nombreApell_mal(self):
+    def nombre_mal(self):
         self.page.snack_bar = ft.SnackBar(
             ft.Text("Nombre y apellido solo deben contener letras", size=30),
             bgcolor="red"

@@ -9,7 +9,7 @@ class Tipo_simulaciones:
         self.page = page
 
     # Terreno: Franco, Estructura: convencional
-    def simulacion1(self, terreno, cultivo, estructura):
+    def simulacion1(self, terreno, cultivo, estructura, tiempo):
         print("Simulación iniciada")
         pygame.init()
         
@@ -42,7 +42,7 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 # Cargar la imagen del rover
-                self.image = pygame.image.load("RoverCrop/img/convencional.png")
+                self.image = pygame.image.load("img/convencional.png")
                 self.image = pygame.transform.scale(self.image, (100, 70))  # Ajustar tamaño de la imagen
 
             def move(self):
@@ -88,7 +88,9 @@ class Tipo_simulaciones:
         # Obtener la posición central de la pantalla
         center_x, center_y = screen_width // 2, screen_height // 2
 
-        while run:
+        max_duration = tiempo
+
+        while run and (time.time()-start_time < max_duration):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -172,7 +174,7 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 # Cargar la imagen del rover
-                self.image = pygame.image.load("RoverCrop/img/oruga.png")
+                self.image = pygame.image.load("img/oruga.png")
                 self.image = pygame.transform.scale(self.image, (100, 70))  # Ajustar tamaño de la imagen
 
             def move(self):
@@ -291,7 +293,7 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 # Cargar la imagen del rover
-                self.image = pygame.image.load("RoverCrop/img/convencional.png")
+                self.image = pygame.image.load("img/convencional.png")
                 self.image = pygame.transform.scale(self.image, (100, 70))  # Ajustar tamaño de la imagen
 
             def move(self):
@@ -407,7 +409,7 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 # Cargar la imagen del rover
-                self.image = pygame.image.load("RoverCrop/img/oruga.png")
+                self.image = pygame.image.load("img/oruga.png")
                 self.image = pygame.transform.scale(self.image, (100, 70))  # Ajustar tamaño de la imagen
 
             def move(self):

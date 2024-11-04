@@ -15,6 +15,7 @@ class Simulacion:
         variables.terrenotxt.value = ""
         variables.cultivotxt.value = ""
         variables.estructuratxt.value = ""
+        variables.tiempotxt.value = ""
         self.page.update()
 
     def iniciar_simulacion(self):

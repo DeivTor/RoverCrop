@@ -164,3 +164,23 @@ estructuratxt = ft.Dropdown(
     width=400,
     height=60
 )
+
+# Input del tiempo
+tiempos = ["20", "30", "60"]
+
+tiempotxt = ft.Dropdown(
+    label="Tiempo",
+    label_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    text_style=TextStyle(
+        color=ft.colors.GREY_500
+    ),
+    border_width=2,
+    border_color=colors.GREY_700,
+    focused_border_color=colors.GREEN_700,
+    border_radius=20,
+    options=[ft.dropdown.Option(opcion) for opcion in tiempos],
+    width=200,
+    height=60
+)
