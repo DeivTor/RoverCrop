@@ -40,9 +40,9 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 if estructura == "Convencional":
-                    self.image = pygame.image.load("img/convencional.png")
+                    self.image = pygame.image.load("RoverCrop/img/convencional.png")
                 elif estructura == "Oruga":
-                    self.image = pygame.image.load("img/oruga.png")
+                    self.image = pygame.image.load("RoverCrop/img/oruga.png")
                 else:
                     raise ValueError("Estructura no válida")
                 self.image = pygame.transform.scale(self.image, (100, 70))
@@ -124,7 +124,7 @@ class Tipo_simulaciones:
 
 #-------------------------------------------------------------#
 #simulacion Terreno: Limoso
-    def simulacion4(self, terreno, cultivo, estructura):
+    def simulacion2(self, terreno, cultivo, estructura, tiempotxt):
         print("Simulación iniciada")
         pygame.init()
         
@@ -154,9 +154,9 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 if estructura == "Convencional":
-                    self.image = pygame.image.load("img/convencional.png")
+                    self.image = pygame.image.load("RoverCrop/img/convencional.png")
                 elif estructura == "Oruga":
-                    self.image = pygame.image.load("img/oruga.png")
+                    self.image = pygame.image.load("RoverCrop/img/oruga.png")
                 else:
                     raise ValueError("Estructura no válida")
                 self.image = pygame.transform.scale(self.image, (100, 70))
@@ -200,10 +200,12 @@ class Tipo_simulaciones:
         step_index = 0
         step_count = 0
 
-        while run:
+        max_duration = tiempotxt  # Asignar el tiempo total según tiempotxt
+        while run and (time.time() - start_time < max_duration):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+
 
             # Limpiar la pantalla
             screen.fill((0, 0, 0))

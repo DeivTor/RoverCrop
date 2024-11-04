@@ -43,8 +43,7 @@ class Simulacion:
             if variables.terrenotxt.value == "Franco":
                 threading.Thread(target=self.Tipo_simulaciones.simulacion1,args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)).start()
             elif variables.terrenotxt.value == "Limoso":
-                threading.Thread(target=self.Tipo_simulaciones.simulacion2,args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)
-                    ).start()
+                threading.Thread(target=self.Tipo_simulaciones.simulacion2,args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value, tiempotxt_value)).start()
             else:
                 print("Terreno no válido. Por favor, seleccione un terreno válido.")
             
