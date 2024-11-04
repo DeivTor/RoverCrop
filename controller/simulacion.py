@@ -9,7 +9,7 @@ class Simulacion:
     def __init__(self, page):
         self.page = page
         self.Tipo_simulaciones = Tipo_simulaciones(self)
-
+        self.running = False  # Control de estado de la simulación
 
     def limpiar_dropdowns(self):
         variables.terrenotxt.value = ""
@@ -17,16 +17,24 @@ class Simulacion:
         variables.estructuratxt.value = ""
         self.page.update()
 
+    def iniciar_simulacion(self):
+        self.running = True
+
+    def detener_simulacion(self):
+        self.running = False
+        self.cerrar_simulacion()  # Cierra los hilos al detener la simulación
+
     def TipoSimulacion(self, e=None):
         if not variables.terrenotxt.value or not variables.cultivotxt.value or not variables.estructuratxt.value:
             self.dato_incompletos()
         else:
             print("Todos los campos seleccionados. Iniciando simulación.")
-            
+            self.iniciar_simulacion()
+
             # Verificar el terreno seleccionado
             if variables.terrenotxt.value == "Franco":
                 if variables.estructuratxt.value == "Convencional":
-                    threading.Thread(target=self.Tipo_simulaciones.simulacion1, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
+                    threading.Thread(target=self. Tipo_simulaciones.simulacion1, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
                 elif variables.estructuratxt.value == "Oruga":
                     threading.Thread(target=self.Tipo_simulaciones.simulacion2, args=(variables.terrenotxt.value, variables.cultivotxt.value, variables.estructuratxt.value)).start()
             elif variables.terrenotxt.value == "Limoso":
@@ -39,7 +47,13 @@ class Simulacion:
                 
             self.limpiar_dropdowns()
 
- 
+    def cerrar_simulacion(self):
+        # Esperar a que todos los hilos se detengan
+        for thread in threading.enumerate():
+            if thread is not threading.main_thread():  # Excluir el hilo principal
+                thread.join()  # Esperar a que el hilo termine
+        print("Simulación finalizada y todos los hilos cerrados.")
+
     def dato_incompletos(self):
         print("Faltan campos por completar")  
         # Esto debería aparecer en la consola si faltan campos
@@ -49,7 +63,14 @@ class Simulacion:
         )
         self.page.snack_bar = snack
         self.page.snack_bar.open = True
-        self.page.update()  # Asegúrate de actualizar la página
+        self.page.update()
+
+    def cerrar_ventana(self):
+        self.detener_simulacion()  # Detener la simulación y cerrar los hilos
+        pygame.quit()
+        self.page.close()
+
+
 
 
     

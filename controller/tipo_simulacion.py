@@ -2,12 +2,13 @@ import threading
 import flet as ft 
 import pygame
 import time
+import math
 
 class Tipo_simulaciones:
     def __init__(self, page):
         self.page = page
 
-    #Terreno: Franco, Estructura: convencional
+    # Terreno: Franco, Estructura: convencional
     def simulacion1(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
@@ -27,6 +28,9 @@ class Tipo_simulaciones:
             (101, 69, 0),    # #654500
             (83, 54, 0),     # #533600
         ]
+
+        # Seleccionar el color más oscuro
+        darkest_color = coffee_colors[-1]  # Último color en la lista (el más oscuro)
 
         line_height = screen_height // len(coffee_colors)
         font = pygame.font.Font(None, 30)
@@ -81,6 +85,9 @@ class Tipo_simulaciones:
         step_index = 0
         step_count = 0
 
+        # Obtener la posición central de la pantalla
+        center_x, center_y = screen_width // 2, screen_height // 2
+
         while run:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -89,15 +96,21 @@ class Tipo_simulaciones:
             # Limpiar la pantalla
             screen.fill((0, 0, 0))
 
-            # Dibujar una grilla de cuadros de colores
+            # Dibujar la grilla de cuadros de colores
             cell_width, cell_height = 120, 90  # Tamaño de cada cuadro
 
             for row in range(0, screen_height, cell_height):
                 for col in range(0, screen_width, cell_width):
-                # Elegir un color de manera cíclica de la lista coffee_colors
-                    color = coffee_colors[(row // cell_height + col // cell_width) % len(coffee_colors)]
+                    # Calcular la distancia desde el centro de la pantalla
+                    distance = math.sqrt((col - center_x) ** 2 + (row - center_y) ** 2)
+                    # Normalizar la distancia para que esté dentro de los índices de los colores
+                    color_index = min(len(coffee_colors) - 1, int(distance // 50))  # 50 puede ajustarse para cambiar la intensidad
+                    color = coffee_colors[color_index]
                     pygame.draw.rect(screen, color, (col, row, cell_width, cell_height))
-                                     
+                    
+            # Colocar el color oscuro en el centro de la pantalla
+            pygame.draw.rect(screen, darkest_color, (center_x - cell_width // 2, center_y - cell_height // 2, cell_width, cell_height))
+
             # Mostrar el tiempo transcurrido
             elapsed_time = time.time() - start_time
             elapsed_text = font.render(f'Tiempo: {int(elapsed_time)} s', True, (255, 255, 255))
@@ -125,8 +138,10 @@ class Tipo_simulaciones:
 
         pygame.quit()
 
-    
-    #Terreno: franco, Estructura: oruga
+
+
+#-------------------------------------------------------------#    
+#Terreno: franco, Estructura: oruga
     def simulacion2(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
@@ -244,7 +259,8 @@ class Tipo_simulaciones:
 
         pygame.quit()
 
-    #simulacion Terreno: limoso, Estructura: convencional
+#-------------------------------------------------------------#
+#simulacion Terreno: limoso, Estructura: convencional
     def simulacion3(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
@@ -359,7 +375,8 @@ class Tipo_simulaciones:
             pygame.display.flip()  # Actualizar la pantalla
             fps.tick(10)    
 
-    #simulacion Terreno: Franco, Estructura: oruga
+#-------------------------------------------------------------#
+#simulacion Terreno: Franco, Estructura: oruga
     def simulacion4(self, terreno, cultivo, estructura):
         print("Simulación iniciada")
         pygame.init()
@@ -472,4 +489,4 @@ class Tipo_simulaciones:
             rover.move()
             rover.draw(screen)  # Dibujar la serpiente
             pygame.display.flip()  # Actualizar la pantalla
-            fps.tick(10)             
+            fps.tick(10)       
