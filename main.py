@@ -3,7 +3,7 @@ from flet import *
 from model import conbd
 from view import variables
 from controller import registro
-from controller.simulacion import Simulacion  
+from controller.simulacion import Simulacion 
 
 
 def main(page: ft.Page):
@@ -42,7 +42,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),
-                                content=ft.Image(src="RoverCrop/img/email.png", width=70, height=70)
+                                content=ft.Image(src="img/email.png", width=70, height=70)
                             ),
                             variables.usuariotxt
                         ],
@@ -56,7 +56,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),
-                                content=ft.Image(src="RoverCrop/img/iden.png", width=70, height=70)
+                                content=ft.Image(src="img/iden.png", width=70, height=70)
                             ),
                             variables.idtxt
                         ],
@@ -72,7 +72,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),
-                                content=ft.Image(src="RoverCrop/img/usuario.png", width=70, height=70)
+                                content=ft.Image(src="img/usuario.png", width=70, height=70)
                             ),
                             variables.nametxt
                         ],
@@ -87,13 +87,13 @@ def main(page: ft.Page):
                         controls=[
                         ft.Container(
                              margin=ft.margin.only(left=20),
-                             content=ft.Image(src="RoverCrop/img/genero.png", width=40, height=40)
+                             content=ft.Image(src="img/genero.png", width=40, height=40)
                         ),
                         variables.genetxt,
 
                         ft.Container(
                              margin=ft.margin.only(left=20),
-                             content=ft.Image(src="RoverCrop/img/ocupacion.png", width=40, height=40)
+                             content=ft.Image(src="img/ocupacion.png", width=40, height=40)
                         ),
                         variables.profesitxt,
                     ],
@@ -177,7 +177,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=20),
-                                content=ft.Image(src="RoverCrop/img/superficie.png", width=70, height=70)
+                                content=ft.Image(src="img/superficie.png", width=70, height=70)
                             ),
                             variables.terrenotxt
                         ],
@@ -190,7 +190,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="RoverCrop/img/cultivo.png", width=60, height=60),
+                                content=ft.Image(src="img/cultivo.png", width=60, height=60),
                             ),
                             variables.cultivotxt
                         ],
@@ -203,7 +203,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="RoverCrop/img/estructura.png", width=60, height=60),
+                                content=ft.Image(src="img/estructura.png", width=60, height=60),
                             ),
                             variables.estructuratxt,
                         ],
@@ -216,7 +216,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 margin=ft.margin.only(left=30),
-                                content=ft.Image(src="RoverCrop/img/tiempo.png", width=60, height=60),
+                                content=ft.Image(src="img/tiempo.png", width=60, height=60),
                             ),
                             variables.tiempotxt,
                         ],

@@ -3,6 +3,7 @@ import flet as ft
 import pygame
 import time
 import math
+from controller import ecuaciones
 from view import variables
 
 
@@ -13,7 +14,11 @@ class Tipo_simulaciones:
     def simulacion1(self, terreno, cultivo, estructura, tiempotxt):
         print("Simulación iniciada")
         pygame.init()
+
+        ecu = ecuaciones.funcionVelocidad()
         
+        velocidad = ecu.calcularVelocidad(terreno)
+
         # Tamaño de la pantalla
         screen_width, screen_height = 1100, 600
         screen = pygame.display.set_mode((screen_width, screen_height))
@@ -35,27 +40,28 @@ class Tipo_simulaciones:
         fps = pygame.time.Clock()
 
         class Rover:
+
             def __init__(self, x, y):
                 self.x = x
                 self.y = y
                 self.direction = 'right'
                 if estructura == "Convencional":
-                    self.image = pygame.image.load("RoverCrop/img/convencional.png")
+                    self.image = pygame.image.load("img/convencional.png")
                 elif estructura == "Oruga":
-                    self.image = pygame.image.load("RoverCrop/img/oruga.png")
+                    self.image = pygame.image.load("img/oruga.png")
                 else:
                     raise ValueError("Estructura no válida")
                 self.image = pygame.transform.scale(self.image, (100, 70))
 
             def move(self):
                 if self.direction == 'right':
-                    self.x += 10
+                    self.x += velocidad
                 elif self.direction == 'left':
-                    self.x -= 10
+                    self.x -= velocidad
                 elif self.direction == 'up':
-                    self.y -= 10
+                    self.y -= velocidad
                 elif self.direction == 'down':
-                    self.y += 10
+                    self.y += velocidad
 
             def draw(self, screen):
                 if self.direction == 'right':
@@ -69,16 +75,8 @@ class Tipo_simulaciones:
                 screen.blit(rotated_image, (self.x, self.y))
 
         # Definición del camino del rover
-        path = [
-            {'direction': 'right', 'steps': 50},
-            {'direction': 'down', 'steps': 20},
-            {'direction': 'left', 'steps': 30},
-            {'direction': 'up', 'steps': 40},
-            {'direction': 'right', 'steps': 60},
-            {'direction': 'down', 'steps': 30},
-            {'direction': 'left', 'steps': 20},
-            {'direction': 'up', 'steps': 50},
-        ]
+        print(velocidad)
+        path = ecu.establecerRuta(velocidad)
 
         rover = Rover(250, 250)
         step_index = 0
@@ -127,6 +125,9 @@ class Tipo_simulaciones:
     def simulacion2(self, terreno, cultivo, estructura, tiempotxt):
         print("Simulación iniciada")
         pygame.init()
+
+        ecu = ecuaciones.funcionVelocidad()
+        velocidad = ecu.calcularVelocidad(terreno)
         
         # Tamaño de la pantalla
         screen_width, screen_height = 1100, 600
@@ -154,21 +155,21 @@ class Tipo_simulaciones:
                 self.y = y
                 self.direction = 'right'
                 if estructura == "Convencional":
-                    self.image = pygame.image.load("RoverCrop/img/convencional.png")
+                    self.image = pygame.image.load("img/convencional.png")
                 elif estructura == "Oruga":
-                    self.image = pygame.image.load("RoverCrop/img/oruga.png")
+                    self.image = pygame.image.load("img/oruga.png")
                 else:
                     raise ValueError("Estructura no válida")
                 self.image = pygame.transform.scale(self.image, (100, 70))
             def move(self):
                 if self.direction == 'right':
-                    self.x += 10
+                    self.x += ecu.calcularVelocidad(terreno)
                 elif self.direction == 'left':
-                    self.x -= 10
+                    self.x -= ecu.calcularVelocidad(terreno)
                 elif self.direction == 'up':
-                    self.y -= 10
+                    self.y -= ecu.calcularVelocidad(terreno)
                 elif self.direction == 'down':
-                    self.y += 10
+                    self.y += ecu.calcularVelocidad(terreno)
 
             def draw(self, screen):
                 # Girar la imagen según la dirección
@@ -185,16 +186,7 @@ class Tipo_simulaciones:
                 screen.blit(rotated_image, (self.x, self.y))
 
         # Definición del camino del "rover"
-        path = [
-            {'direction': 'right', 'steps': 50},
-            {'direction': 'down', 'steps': 20},
-            {'direction': 'left', 'steps': 30},
-            {'direction': 'up', 'steps': 40},
-            {'direction': 'right', 'steps': 60},
-            {'direction': 'down', 'steps': 30},
-            {'direction': 'left', 'steps': 20},
-            {'direction': 'up', 'steps': 50},
-        ]
+        path = ecu.establecerRuta(velocidad)
 
         rover = Rover(250, 250)
         step_index = 0
