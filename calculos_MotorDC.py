@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 #K es la ganancia en bajas frecuencias del motor (valor máximo deseado de la función de transferencia en lazo abierto)
 #Vf es la amplitud del voltaje que alimenta el motor
 
+
 #Para las pruebas de simulación tomamos el siguiente motor DC
 #https://pages.mtu.edu/~wjendres/ProductRealization1Course/Motor_Specs.pdf
 
@@ -51,11 +52,14 @@ plt.title('Velocidad rpm del motor DC en el tiempo')
 fig2.show()
 
 
+
 #Se ajustan los datos para una velocidad lineal del Rover.
 #r es el radio del neumático utilizado (puede incluir el grosor de la oruga en caso de que se utilice esta) en mts
 #v es la velocidad lineal que puede proveer el motor DC a la estructura (De manera ideal)
+
 r=0.1
 v = w * r
+
 
 #Se genera la gráfica de velocidad lineal en el tiempo.
 fig3 = plt.figure()
