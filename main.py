@@ -6,6 +6,7 @@ from controller import registro
 from controller.simulacion import Simulacion 
 
 
+
 def main(page: ft.Page):
     page.title = "RoverCrop"
 
