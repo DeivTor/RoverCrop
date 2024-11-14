@@ -10,7 +10,7 @@ from controller.simulacion import Simulacion
 def main(page: ft.Page):
     page.title = "RoverCrop"
 
-    # Inicializar la instancia de Registro
+    # Inicializar la instancia de Registroo
     conexion = conbd.conexion
     cursor = conbd.cursor
     registro_controller = registro.Registro(page, cursor, conexion)

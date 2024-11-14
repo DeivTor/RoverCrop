@@ -232,5 +232,5 @@ class Tipo_simulaciones:
 
             rover.move()
             rover.draw(screen)  # Dibujar la serpiente
-            pygame.display.flip()  # Actualizar la pantalla
+            pygame.display.flip()  # Actualizar la pantala
             fps.tick(10)       

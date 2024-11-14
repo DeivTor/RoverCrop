@@ -68,6 +68,8 @@ class funcionVelocidad:
         elif(velocidad != 10 and velocidad !=30):
             print("Prueba con las ecuaciones.")
             
-        return self.ruta
+            return self.ruta
 
     
+
+
