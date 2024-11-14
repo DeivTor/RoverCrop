@@ -4,6 +4,7 @@ import matplotlib.pylab as plb
 import matplotlib.mlab as mlb
 import matplotlib.pyplot as plt
 
+
 class funcionVelocidad:
 
     def __init__(self):
