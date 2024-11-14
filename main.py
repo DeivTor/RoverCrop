@@ -1,5 +1,5 @@
-import flet as ft
-from flet import *
+import flet as ft  
+from flet import  *
 from model import conbd
 from view import variables
 from controller import registro
