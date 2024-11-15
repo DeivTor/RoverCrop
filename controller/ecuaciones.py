@@ -10,6 +10,7 @@ class funcionVelocidad:
     def _init(self):  # Cambiado a __init_
         self.ruta = []
 
+
     def calcularVelocidad(self, terreno):
         if terreno == "Limoso":
             t = np.linspace(0, 0.25, 1000)
