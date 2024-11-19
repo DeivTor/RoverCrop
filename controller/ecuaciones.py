@@ -23,7 +23,7 @@ class funcionVelocidad:
             r = 0.1
             v = w * r
             velocidad = int(v.ptp())
-            print(velocidad)
+        
 
         elif terreno == "Franco":
             t = np.linspace(0, 0.25, 1000)
@@ -36,7 +36,7 @@ class funcionVelocidad:
             r = 0.1
             v = w * r
             velocidad = int(v.ptp())
-            
+
         return velocidad
     
     def establecerRuta(self, velocidad):
@@ -50,25 +50,42 @@ class funcionVelocidad:
                 {'direction': 'down', 'steps': 20},
                 {'direction': 'left', 'steps': 30},
                 {'direction': 'up', 'steps': 40},
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 30},
+                {'direction': 'up', 'steps': 40},
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 30},
+                {'direction': 'up', 'steps': 30},
+                {'direction': 'right', 'steps': 50},
             ]
         elif velocidad <=9:
-            self.ruta = [{'direction': 'right', 'steps': 50},
-                        {'direction': 'down', 'steps': 20},
-                        {'direction': 'left', 'steps': 30},
-                        {'direction': 'up', 'steps': 40},
-                        {'direction': 'right', 'steps': 50},
-                        {'direction': 'down', 'steps': 20},
-                        {'direction': 'left', 'steps': 30},
+            self.ruta = [
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 30},
+                {'direction': 'up', 'steps': 40},
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 30},
+                {'direction': 'up', 'steps':20},
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 30},
+                {'direction': 'up', 'steps': 20},
+                {'direction': 'right', 'steps': 20},
+                {'direction': 'down', 'steps': 20},
+                {'direction': 'left', 'steps': 60},
+                {'direction': 'up', 'steps': 30},
+                {'direction': 'right', 'steps': 50},
+                {'direction': 'down', 'steps': 60},
                     
             ] 
         else:
             print("Velocidad fuera del rango esperado.")
             return velocidad
-
-        return self.ruta
+        return self.ruta 
     
    
-
-    
-
 
