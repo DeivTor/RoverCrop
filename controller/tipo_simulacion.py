@@ -27,6 +27,10 @@ class Tipo_simulaciones:
         run = True
         start_time = time.time()  # Para medir el tiempo transcurrido
 
+        # Cambiar el ícono de la ventana
+        icon = pygame.image.load("img/logo.PNG")  # Cambia la ruta al archivo de tu ícono
+        pygame.display.set_icon(icon)
+
         # Colores y configuración
         coffee_colors = [
             (157, 115, 23),  # #9D7317
@@ -136,6 +140,10 @@ class Tipo_simulaciones:
 
         run = True
         start_time = time.time()  # Para medir el tiempo transcurrido
+
+         # Cambiar el ícono de la ventana
+        icon = pygame.image.load("img/logo1.PNG")  # Cambia la ruta al archivo de tu ícono
+        pygame.display.set_icon(icon)
 
         # Colores y configuración
         coffee_colors = [
